@@ -6,7 +6,7 @@ test:
    - mvn install:install-file -Dfile=$CIRCLE_TEST_REPORTS/store/csv-1.0.jar -DgroupId=org.skife.kasparov -DartifactId=csv -Dversion=1.0 -Dpackaging=jar
  
  override:
-   - mvn package -Pbenchmark 
+   - mvn package -Pbenchmark -Dbenchmark=foo
    
  post:
    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
