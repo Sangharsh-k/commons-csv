@@ -8,7 +8,7 @@ test:
  override:
    - mvn package -Pbenchmark 
    
-  post:
+ post:
    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
    - find . -type f -regex ".*/target/.*json" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \; 
  
