@@ -1,2 +1,12 @@
-
-
+test:
+ pre:
+   - mkdir -p $CIRCLE_TEST_REPORTS/mydir
+   - wget -O $CIRCLE_TEST_REPORTS/mydir/csv-1.0.jar "http://kasparov.skife.org/csv/csv-1.0.jar"
+   - mvn install:install-file -Dfile=$CIRCLE_TEST_REPORTS/mydir/csv-1.0.jar -DgroupId=org.skife.kasparov -DartifactId=csv -Dversion=1.0 -Dpackaging=jar
+   
+ override:
+   - mvn package -Pbenchmark
+ 
+ post:
+   - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+   - find . -type f -regex ".*/target/site/serenity/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \; 
